@@ -16,6 +16,7 @@ buildNumber.properties
 **/.mvn
 
 **/target/
+**/db/
 
 .idea
 
