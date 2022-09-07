@@ -6,7 +6,7 @@
 	<artifactId>renren-fast</artifactId>
 	<version>3.0.0</version>
 	<packaging>jar</packaging>
-	<description>renren-fast</description>
+	<description>renren-fast 人人开源后台项目</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -81,11 +81,11 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-devtools</artifactId>-->
-			<!--<optional>true</optional>-->
-		<!--</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-devtools</artifactId>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
