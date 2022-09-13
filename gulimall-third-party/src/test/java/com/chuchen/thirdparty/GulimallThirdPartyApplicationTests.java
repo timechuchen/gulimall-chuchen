@@ -1,6 +1,7 @@
 package com.chuchen.thirdparty;
 
 import com.aliyun.oss.ClientException;
+import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import java.io.InputStream;
 class GulimallThirdPartyApplicationTests {
 
     @Autowired
-    OSSClient ossClient;
+    OSS ossClient;
 
     @Test
     void contextLoads() {
