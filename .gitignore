@@ -17,7 +17,7 @@ buildNumber.properties
 
 **/target/
 **/db/
-
+gulimall-third-party/src/main/resources/application.yml
 .idea
 
 .gitignore
