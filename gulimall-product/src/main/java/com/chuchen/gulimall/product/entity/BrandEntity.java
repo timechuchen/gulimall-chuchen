@@ -2,6 +2,10 @@ package com.chuchen.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.chuchen.gulimall.product.valid.AddGroup;
+import com.chuchen.gulimall.product.valid.ListValue;
+import com.chuchen.gulimall.product.valid.UpdateGroup;
+import com.chuchen.gulimall.product.valid.UpdateStatusGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
@@ -23,41 +27,42 @@ public class BrandEntity implements Serializable {
 	/**
 	 * 品牌id
 	 */
-
+	@Null(message = "新增不能指定 id",groups = {AddGroup.class})
+	@NotNull(message = "修改必须指定品牌 id",groups = {UpdateGroup.class})
 	@TableId
 	private Long brandId;
 	/**
 	 * 品牌名
 	 */
-	@NotBlank(message = "品牌名必须提交") //该字段必须是一个非空格字符
+	@NotBlank(message = "品牌名必须提交",groups = {AddGroup.class}) //该字段必须是一个非空格字符
 	private String name;
 	/**
 	 * 品牌logo地址
 	 */
-	@NotEmpty
-	@URL(message = "logo必须是一个合法的地址")
+	@NotEmpty(groups = {AddGroup.class})
+	@URL(message = "logo必须是一个合法的地址",groups = {AddGroup.class,UpdateGroup.class})
 	private String logo;
 	/**
 	 * 介绍
 	 */
-	@NotEmpty
 	private String descript;
 	/**
 	 * 显示状态[0-不显示；1-显示]
 	 */
-	@NotNull
+	@NotNull(groups = {AddGroup.class,UpdateGroup.class})
+	@ListValue(values={0,1},groups = {AddGroup.class, UpdateStatusGroup.class})
 	private Integer showStatus;
 	/**
 	 * 检索首字母
 	 */
-	@NotEmpty
-	@Pattern(regexp = "/^[a-zA-Z]$/",message = "检索首字母必须是一个字母")
+	@NotEmpty(groups = {AddGroup.class})
+	@Pattern(regexp = "^[a-zA-Z]$",message = "检索首字母必须是一个字母",groups = {AddGroup.class,UpdateGroup.class})
 	private String firstLetter;
 	/**
 	 * 排序
 	 */
-	@NotNull
-	@Min(value = 0,message = "排序必须等于大于零")
+	@NotNull(groups = {AddGroup.class})
+	@Min(value = 0,message = "排序必须等于大于零",groups = {AddGroup.class,UpdateGroup.class})
 	private Integer sort;
 
 }

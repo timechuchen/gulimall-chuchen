@@ -2,6 +2,7 @@ package com.chuchen.gulimall.product.exception;
 
 import com.chuchen.common.exception.BizCodeEnume;
 import com.chuchen.common.utils.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,7 +17,7 @@ import java.util.Map;
  * @Date 2022/9/13
  * @Description 统一异常处理
  */
-//@Slf4j
+@Slf4j
 @RestControllerAdvice(basePackages = "com.chuchen.gulimall.product.controller")
 public class GulimallExceptionControllerAdvice {
     @ResponseBody
@@ -33,6 +34,7 @@ public class GulimallExceptionControllerAdvice {
 
     @ExceptionHandler(value = Throwable.class)
     public R handleException(Throwable throwable) {
+        log.error("错误信息：",throwable);
         return R.error(BizCodeEnume.UNKNOWN_EXCEPTION.getCode(), BizCodeEnume.UNKNOWN_EXCEPTION.getMessage());
     }
 }

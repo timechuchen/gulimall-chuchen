@@ -1,23 +1,18 @@
 package com.chuchen.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.chuchen.gulimall.product.entity.BrandEntity;
-import com.chuchen.gulimall.product.service.BrandService;
 import com.chuchen.common.utils.PageUtils;
 import com.chuchen.common.utils.R;
+import com.chuchen.gulimall.product.entity.BrandEntity;
+import com.chuchen.gulimall.product.service.BrandService;
+import com.chuchen.gulimall.product.valid.AddGroup;
+import com.chuchen.gulimall.product.valid.UpdateGroup;
+import com.chuchen.gulimall.product.valid.UpdateStatusGroup;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -61,7 +56,7 @@ public class BrandController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("product:brand:save")
-    public R save(@Valid @RequestBody BrandEntity brand){
+    public R save(@Validated(AddGroup.class) @RequestBody BrandEntity brand){
 //        if(result.hasErrors()) {
 //            Map<String,String> map = new HashMap<>();
 //            result.getFieldErrors().forEach((e)->{
@@ -84,8 +79,18 @@ public class BrandController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("product:brand:update")
-    public R update(@RequestBody BrandEntity brand){
+    public R update(@Validated(UpdateGroup.class) @RequestBody BrandEntity brand){
 		brandService.updateById(brand);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改显示状态
+     */
+    @RequestMapping("/update/status")
+    public R updateStatus(@Validated(UpdateStatusGroup.class) @RequestBody BrandEntity brand){
+        brandService.updateById(brand);
 
         return R.ok();
     }

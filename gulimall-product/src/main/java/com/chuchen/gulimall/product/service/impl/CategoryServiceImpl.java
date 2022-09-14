@@ -2,6 +2,8 @@ package com.chuchen.gulimall.product.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -55,6 +57,27 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         //一般真正的是做逻辑删除，不是真正的物理删除
 
         baseMapper.deleteBatchIds(asList);
+    }
+
+    /**
+     * 找到 catelogId 的完整路径
+     */
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+        List<Long> paths = new ArrayList<>();
+        List<Long> parentPath = finParentPath(catelogId, paths);
+        Collections.reverse(parentPath);
+        return parentPath.toArray(new Long[0]);
+    }
+
+    protected List<Long> finParentPath(Long catelogId,List<Long> paths) {
+        //收集当前节点的id
+        paths.add(catelogId);
+        CategoryEntity byId = this.getById(catelogId);
+        if(byId.getParentCid() != 0) {
+            finParentPath(byId.getParentCid(),paths);
+        }
+        return paths;
     }
 
     /**
