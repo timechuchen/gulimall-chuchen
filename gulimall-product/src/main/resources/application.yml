@@ -28,6 +28,6 @@ mybatis-plus:
       logic-delete-value: 0
       logic-not-delete-value: 1
 # 打印日志级别
-#logging:
-#  level:
-#    com.chuhcen.gulimall: debug
+logging:
+  level:
+    com.chuhcen.gulimall: debug
