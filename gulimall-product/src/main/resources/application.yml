@@ -2,6 +2,8 @@ server:
   port: 10000
 
 spring:
+  main:
+    allow-circular-references: true
   datasource:
     username: root
     password: root
@@ -13,6 +15,8 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
 
 
 mybatis-plus:
@@ -23,6 +27,6 @@ mybatis-plus:
       logic-delete-value: 0
       logic-not-delete-value: 1
 # 打印日志级别
-logging:
-  level:
-    com.chuhcen.gulimall: debug
+#logging:
+#  level:
+#    com.chuhcen.gulimall: debug

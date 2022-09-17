@@ -79,7 +79,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         QueryWrapper<AttrEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("attr_type","base".equalsIgnoreCase(type)?ProductConstant.AttrEnum.ATTR_TYPE_BASE.getCode():ProductConstant.AttrEnum.ATTR_TYPE_SALE.getCode());
         if(catelogId != 0) {
-            queryWrapper.eq("catelog_od",catelogId);
+            queryWrapper.eq("catelog_id",catelogId);
         }
 
         String key = (String) params.get("key");
