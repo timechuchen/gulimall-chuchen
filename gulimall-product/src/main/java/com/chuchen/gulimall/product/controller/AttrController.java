@@ -1,8 +1,11 @@
 package com.chuchen.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import com.chuchen.gulimall.product.entity.ProductAttrValueEntity;
+import com.chuchen.gulimall.product.service.ProductAttrValueService;
 import com.chuchen.gulimall.product.vo.AttrGroupRelationVo;
 import com.chuchen.gulimall.product.vo.AttrRespVo;
 import com.chuchen.gulimall.product.vo.AttrVo;
@@ -29,6 +32,8 @@ import javax.annotation.PostConstruct;
 public class AttrController {
     @Autowired
     private AttrService attrService;
+    @Autowired
+    private ProductAttrValueService productAttrValueService;
 
     /**
      * 列表
@@ -39,6 +44,15 @@ public class AttrController {
         PageUtils page = attrService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    /**
+     * 查出商品的规格参数
+     */
+    @GetMapping("/base/listforspu/{spuId}")
+    public R listforspu(@PathVariable("spuId") Long spuId) {
+        List<ProductAttrValueEntity> entities = productAttrValueService.listforspu(spuId);
+        return R.ok().put("data",entities);
     }
 
     @GetMapping("/{attrType}/list/{catelogId}")
@@ -79,6 +93,13 @@ public class AttrController {
     public R update(@RequestBody AttrVo attr){
 		attrService.updateAttr(attr);
 
+        return R.ok();
+    }
+
+    @PostMapping("/update/{spuId}")
+    //@RequiresPermissions("product:attr:update")
+    public R updateSpuAttr(@PathVariable("spuId") Long spuId,@RequestBody List<ProductAttrValueEntity> entities){
+        productAttrValueService.updateSpuAttr(spuId,entities);
         return R.ok();
     }
 

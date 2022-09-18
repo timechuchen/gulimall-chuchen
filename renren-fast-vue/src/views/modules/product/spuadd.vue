@@ -356,7 +356,7 @@
           });
       },
       showInput(idx) {
-        console.log('``````', this.view);
+        // console.log('``````', this.view);
         this.inputVisible[idx].view = true;
         // this.$refs['saveTagInput'+idx].$refs.input.focus();
       },
@@ -563,7 +563,7 @@
       },
 
       submitSkus() {
-        console.log('~~~~~', JSON.stringify(this.spu));
+        // console.log('~~~~~', JSON.stringify(this.spu));
         this.$confirm('将要提交商品数据，需要一小段时间，是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
